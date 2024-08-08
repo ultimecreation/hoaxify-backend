@@ -34,8 +34,18 @@ router.post('/api/1.0/users',
             return res.status(400).send({ validationErrors })
         }
 
-        await UserService.save(req.body)
-        return res.status(200).send({ message: "user_create_success" })
+        try {
+            await UserService.save(req.body)
+            return res.status(200).send({ message: "user_create_success" })
+        } catch (error) {
+            return res.status(502).send()
+        }
     })
+
+router.post(`/api/1.0/users/token/:token`, async (req, res) => {
+    const token = req.params.token
+    await UserService.activate(token)
+    res.send()
+})
 
 module.exports = router
