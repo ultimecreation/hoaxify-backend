@@ -177,7 +177,7 @@ describe('User register', () => {
 
         const users = await User.findAll()
         const savedUser = users[0]
-        console.log('RETEST', lastMail)
+
         expect(lastMail).toContain(savedUser.activationToken)
         expect(lastMail).toContain("user1@email.com")
 

@@ -30,10 +30,33 @@ const activate = async (token) => {
     user.inactive = false
     user.activationToken = null
     await user.save()
-    console.log({ 'user': user, 'token': token })
+}
 
+const getUsers = async (page, size) => {
+
+    const users = await User.findAndCountAll({
+        where: { inactive: false },
+        attributes: [
+            'id', 'username', 'email'
+        ],
+        limit: size,
+        offset: page * size
+    })
+    return {
+        content: users.rows,
+        page,
+        size,
+        totalPages: Math.ceil(users.count / size)
+    }
+}
+const getUser = async (userId) => {
+
+    const user = await User.findOne({
+        where: { id: userId }
+    })
+    return user
 }
 
 module.exports = {
-    save, findByEmail, activate
+    save, findByEmail, activate, getUsers, getUser
 }
