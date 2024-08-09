@@ -122,7 +122,7 @@ describe('Get User', () => {
             inactive: false
         })
         const response = await getUser(user.id)
-        console.log('test', response.body)
+
         expect(response.status).toBe(200)
         expect(response.body.id).toBe(user.id)
         expect(response.body.username).toBe('user1')
@@ -134,7 +134,7 @@ describe('Get User', () => {
             email: `user1@email.com`
         })
         const response = await getUser(user.id)
-        console.log('test', response.body)
+
         expect(response.status).toBe(404)
     })
 })

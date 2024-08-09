@@ -22,7 +22,9 @@ const save = async (body) => {
 }
 
 const findByEmail = async (email) => {
-    return await User.findOne({ where: { email } })
+    return await User.findOne({
+        where: { email, inactive: false }
+    })
 }
 
 const activate = async (token) => {

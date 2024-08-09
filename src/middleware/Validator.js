@@ -18,6 +18,14 @@ module.exports = {
         body('password')
             .notEmpty()
             .withMessage("password_null"),
-    ]
+    ],
+    validateIncomingFieldsOnLogin: [
+        body('email')
+            .notEmpty()
+            .withMessage("email_null"),
+        body('password')
+            .notEmpty()
+            .withMessage("password_null"),
+    ],
 
 }

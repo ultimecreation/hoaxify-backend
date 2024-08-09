@@ -11,8 +11,8 @@ const addUsers = async (activeUserCount, inactiveUserCount = 0) => {
     }
 }
 sequelize.sync()
-    .then(async () => {
-        await addUsers(18, 12)
-    })
+// .then(async () => {
+//     await addUsers(18, 12)
+// })
 
 app.listen(3000, () => console.log('app is running'))
