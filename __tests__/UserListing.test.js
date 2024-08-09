@@ -115,14 +115,26 @@ describe('Get User', () => {
 
         expect(response.body.message).toBe('User not found')
     })
-    it('returns 200 OK when user is found', async () => {
+    it('returns 200 OK and user id,username and email when user is found', async () => {
         const user = await User.create({
             username: `user1`,
             email: `user1@email.com`,
             inactive: false
         })
         const response = await getUser(user.id)
-
+        console.log('test', response.body)
         expect(response.status).toBe(200)
+        expect(response.body.id).toBe(user.id)
+        expect(response.body.username).toBe('user1')
+        expect(response.body.email).toBe('user1@email.com')
+    })
+    it('returns 404 OK when user is inactive', async () => {
+        const user = await User.create({
+            username: `user1`,
+            email: `user1@email.com`
+        })
+        const response = await getUser(user.id)
+        console.log('test', response.body)
+        expect(response.status).toBe(404)
     })
 })

@@ -52,7 +52,8 @@ const getUsers = async (page, size) => {
 const getUser = async (userId) => {
 
     const user = await User.findOne({
-        where: { id: userId }
+        where: { id: userId, inactive: false },
+        attributes: ['id', 'username', 'email']
     })
     return user
 }
